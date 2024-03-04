@@ -1,7 +1,8 @@
 import React from 'react';
-import { Drawer, Button, Loader, Divider } from 'rsuite';
+import { Drawer, Button, Loader, Divider, Alert } from 'rsuite';
 import { useProfile } from '../../context/profile.context';
 import EditableInput from '../EditableInputs';
+import { database } from '../../misc/firebase';
 
 const Dashboard = ({ onSignOut }) => {
   const { profile } = useProfile();
@@ -9,7 +10,16 @@ const Dashboard = ({ onSignOut }) => {
     return <Loader center vertical size="md" speed="slow" />;
   }
   const onSave = async newData => {
-    console.log(newData);
+    const userNickNameRef = database
+      .ref(`/profiles/${profile.uid}`)
+      .child('name');
+
+    try {
+      await userNickNameRef.set(newData);
+      Alert.success('Nickname has been updated', 4000);
+    } catch (err) {
+      Alert.error(err.message || 'Something went wrong!', 4000);
+    }
   };
   return (
     <>
