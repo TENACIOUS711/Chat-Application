@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Icon, Tag, Alert } from 'rsuite';
+import { Button, Icon, Tag } from 'rsuite';
 import { auth } from '../../misc/firebase';
 
 const ProviderBlock = () => {
