@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import transformToArrayWithId from '../misc/Helpers';
 
 import { database } from '../misc/firebase';
@@ -20,7 +20,12 @@ export const RoomsProvider = ({ children }) => {
       roomListRef.off();
     };
   }, []);
+  if (rooms === null) {
+    return <div>Loading...</div>;
+  }
   return (
-    <RoomsContext.Provider value="hello">{children}</RoomsContext.Provider>
+    <RoomsContext.Provider value={rooms}>{children}</RoomsContext.Provider>
   );
 };
+
+export const useRooms = () => useContext(RoomsContext);
