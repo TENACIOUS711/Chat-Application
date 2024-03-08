@@ -7,6 +7,7 @@ import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 const ChatRoomList = ({ aboveElHeight }) => {
   const rooms = useRooms();
   const location = useLocation();
+
   return (
     <Nav
       appearance="subtle"

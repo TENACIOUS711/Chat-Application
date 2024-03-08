@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Loader } from 'rsuite';
 import transformToArrayWithId from '../misc/Helpers';
 
 import { database } from '../misc/firebase';
@@ -20,8 +21,10 @@ export const RoomsProvider = ({ children }) => {
       roomListRef.off();
     };
   }, []);
-  if (rooms === null) {
-    return <div>Loading...</div>;
+  {
+    !rooms && (
+      <Loader center vertical content="Loading" speed="slow" size="md" />
+    );
   }
   return (
     <RoomsContext.Provider value={rooms}>{children}</RoomsContext.Provider>
